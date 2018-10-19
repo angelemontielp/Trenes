@@ -1,4 +1,10 @@
+/**
+	Va bien hay que pensar mejor como interactuan los objetos entre si, está toda la responsabilidad en el depósito. Hay que pensar mas en objetos menos en estructurado
 
+	El ejercicio implica VagonesDePasajeros, VagonesDeCarga, Locomotoras, Deposito. Pensar como modelar estás entidades y que responsabilidad le toca a cada una.
+
+	No Hay un solo test. Hacer tests!
+ */
 
 class Deposito {
 	
@@ -58,8 +64,10 @@ class Deposito {
 		formationWeightPas = pasWagonWeight + locoActualWeight
 	}
 	
-	//Pregunta 1
-	method numLightPasWagon () {
+
+	//Pregunta 1  // El razonamiento parece correcto, tratar de pasar esto a bloques (closures) sin usar el for, apoyarse en el ejercicio de mensajeros
+	// en la documentación de la paǵina
+	method numLightPasWagon () {			
 		for (i = 0, i < numLightWagon, i++){
 			if(pasWagonWeight < 2500 && locoActualWeight < 12000){
 				numLightWagon ++
@@ -70,7 +78,7 @@ class Deposito {
 	
 	//Pregunta 2
 	method maxSpeed () {
-		formation.loco.speed.min
+		formation.loco.speed.min  // Ojo acá formation no entiende el mensaje loco y speed no es una property o método y no te va a dejar accederla
 	}
 	//Fin Pregunta 2
 	
@@ -141,7 +149,17 @@ object wagon {
 
 object loco {
 	weightLoco = locoActualWeight
-	speed = locoSpeed
+	speed = locoSpeed  // si quisiera que esta variable sea accesible por otro objeto lo hago una property o hago un método que me devuelva su valor y locoSpeed no es un valor
+	
+	/**
+		var property speed
+
+		ó
+
+		method speed(){
+			return speed		
+		}
+	 */
 }
 
 object formation {
