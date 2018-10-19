@@ -1,9 +1,11 @@
 /**
-	Va bien hay que pensar mejor como interactuan los objetos entre si, está toda la responsabilidad en el depósito. Hay que pensar mas en objetos menos en estructurado
+	Pensar mejor como interactuan los objetos entre sí, está toda la responsabilidad en el Depósito. Hay que pensar mas en objetos menos en estructurado
 
-	El ejercicio implica VagonesDePasajeros, VagonesDeCarga, Locomotoras, Deposito. Pensar como modelar estás entidades y que responsabilidad le toca a cada una.
+	El ejercicio implica VagonesDePasajeros, VagonesDeCarga, Locomotora, Deposito. Pensar como modelar estás entidades y que responsabilidad le toca a cada una.
+	
+	No concentrarse tanto en resolver los algoritmos sino en el diseño, en como conviene que se "hablen" los objetos entre sí, si el diseño está bien la solución se vuelve simple.
 
-	No Hay un solo test. Hacer tests!
+	No hay un solo test. Hacer tests!
  */
 
 class Deposito {
@@ -65,9 +67,12 @@ class Deposito {
 	}
 	
 
-	//Pregunta 1  // El razonamiento parece correcto, tratar de pasar esto a bloques (closures) sin usar el for, apoyarse en el ejercicio de mensajeros
-	// en la documentación de la paǵina
-	method numLightPasWagon () {			
+	//Pregunta 1  
+	method numLightPasWagon () {
+	/**
+	 El razonamiento parece correcto, tratar de pasar esto a bloques (closures) sin usar el for,
+	 apoyarse en el ejercicio de mensajeros y en la documentación de la paǵina
+	*/
 		for (i = 0, i < numLightWagon, i++){
 			if(pasWagonWeight < 2500 && locoActualWeight < 12000){
 				numLightWagon ++
@@ -78,13 +83,20 @@ class Deposito {
 	
 	//Pregunta 2
 	method maxSpeed () {
-		formation.loco.speed.min  // Ojo acá formation no entiende el mensaje loco y speed no es una property o método y no te va a dejar accederla
+		// Ojo acá formation no entiende el mensaje loco (que es loco??) y speed no es una property o método y no te va a dejar accederla y además no resuelve lo pedido
+		formation.loco.speed.min  
+		/*
+		 * la formacion debe poder devolver su velocidad máxima que depende de la velocidad máxima mas baja de las locomotoras que compongan a esa formación, algo como:
+		 * Sí la formación tiene una lista de locomotoras
+		 * locomotoras.min({locomotora => locomotora.velocidaMaxima()})
+		 */
+		
 	}
 	//Fin Pregunta 2
 	
 	//Pregunta 3
-	method isEfficient () {
-		if(locoActualWeight > pasWagonWeight*5){
+	method isEfficient () { 
+		if(locoActualWeight > pasWagonWeight*5){  
 			isEfficient = true
 		}else if (locoActualWeight > loadActualWagonWeight*5){
 			isEfficient = true
@@ -149,7 +161,7 @@ object wagon {
 
 object loco {
 	weightLoco = locoActualWeight
-	speed = locoSpeed  // si quisiera que esta variable sea accesible por otro objeto lo hago una property o hago un método que me devuelva su valor y locoSpeed no es un valor
+	speed = locoSpeed  // si quisiera que esta variable sea accesible por otro objeto lo hago con una property o hago un método que me devuelva su valor, y locoSpeed no es un valor
 	
 	/**
 		var property speed
